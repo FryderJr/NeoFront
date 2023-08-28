@@ -1,18 +1,21 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore, createSlice, combineReducers } from '@reduxjs/toolkit'
 
-const initialState = {
+const authState = {
   token: '',
   user: {
-    id: '',
-    name: '',
-    department_id: '',
-    role_id: ''
+    username: '',
+    password: ''
   }
+}
+
+const dataState = {
+  pupils: [],
+  logs: []
 }
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: authState,
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload
@@ -25,16 +28,25 @@ const authSlice = createSlice({
 
 const dataSlice = createSlice({
   name: 'data',
-  initialState,
+  initialState: dataState,
   reducers: {
-    setData: (state, action) => {
-      
+    setPupils: (state, action) => {
+      state.pupils = action.payload
+    },
+    setLogs: (state, action) => {
+      state.logs = action.payload
     }
   }
 })
 
+const reducer = combineReducers({
+  auth: authSlice.reducer,
+  data: dataSlice.reducer
+})
+
 export const { setToken, setUser } = authSlice.actions
+export const { setPupils, setLogs } = dataSlice.actions
 
 export const store = configureStore({
-  reducer: authSlice.reducer
-});
+  reducer: reducer
+})

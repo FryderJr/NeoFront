@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Input, Modal } from 'semantic-ui-react'
-import * as jwt from 'jsonwebtoken'
+import { Button, Input, Modal, Message } from 'semantic-ui-react'
+import { login } from '../../api'
 import { setToken, setUser } from '../../reducers'
 import { useDispatch, useSelector } from 'react-redux'
 
 function Auth() {
 
-  const token = useSelector(state => { console.log(state); return state.token })
-  const user = useSelector(state => state.user)
+  const token = useSelector(state => { console.log(state); return state.auth.token })
+  const user = useSelector(state => state.auth.user)
 
   console.log(token)
   console.log(user)
@@ -15,53 +15,28 @@ function Auth() {
   const dispatch = useDispatch()
 
   const [open, setOpen] = useState(true)
-  const [login, setLogin] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const sendCredentials = async () => {
 
     try {
       const data = {
-        login,
+        username,
         password
       }
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }
-      const response = await fetch(`${process.env.REACT_APP_CORE}login`, requestOptions)
-      const newToken = await response.text()
+      const response = await login(username, password)
+      const newToken = response.auth_token
       console.log(newToken)
       dispatch(setToken(newToken))
-      const decoded = jwt.decode(newToken, process.env.REACT_APP_TOKEN_KEY)
-      dispatch(setUser({
-        id: decoded.id,
-        name: decoded.name,
-        department_id: decoded.department_id,
-        role_id: decoded.role_id
-      }))
-      console.log(decoded)
-    } catch (e) {
-      return
-    }
-
-    try {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          'x-access-token': token
-        }
-      }
-
-      const response = fetch(`${process.env.REACT_APP_CORE}verify`, requestOptions)
-      console.log(response)
-    } catch (e) {
-
-    } finally {
+      dispatch(setUser(data))
+      setError('')
       setOpen(false)
+    } catch (e) {
+      console.log(e)
+      setError('Не удалось авторизоваться. Проверьте правильность введённых данных или попробуйте позднее')
+      return
     }
   }
 
@@ -81,7 +56,7 @@ function Auth() {
             placeholder='Логин'
             size='large'
             onChange={(e) => {
-              setLogin(e.target.value)
+              setUsername(e.target.value)
             }}
           />
           <br />
@@ -95,6 +70,9 @@ function Auth() {
             }}
           />
         </Modal.Description>
+        {
+          error && <Message error><p>{error}</p></Message>
+        }
       </Modal.Content>
       <Modal.Actions>
         <Button

@@ -1,26 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import { Form, Grid, Input, Button, Segment, Label, Table, Item, Header, Container } from 'semantic-ui-react'
+import React, { useEffect } from 'react'
+import { Label, Item } from 'semantic-ui-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { callApi } from '../../api'
+import { setPupils } from '../../reducers'
 
-const pupils = [
+const mock_pupils = [
     {
-        name: 'А. А. Абрахманов',
-        progress: 2,
-        class: 7
+        username: 'А. А. Абрахманов',
+        last_quest: {
+
+        }
     },
     {
-        name: 'А. А. Абрахманов',
-        progress: 9,
-        class: 6
+        username: 'А. А. Абрахманов',
+        last_quest: {
+
+        }
     },
     {
-        name: 'А. А. Абрахманов',
-        progress: 7,
-        class: 8
+        username: 'А. А. Абрахманов',
+        last_quest: {
+
+        }
     },
     {
-        name: 'А. А. Абрахманов',
-        progress: 4,
-        class: 9
+        username: 'А. А. Абрахманов',
+        last_quest: {
+            quest_id: 1,
+            points: 555
+        }
     }
 ]
 
@@ -41,6 +49,33 @@ const quests = [
 
 function Pupils() {
 
+    const dispatch = useDispatch()
+
+    const token = useSelector(state => { console.log(state); return state.auth.token })
+    const pupils = useSelector(state => { return state.data.pupils })
+
+    const getPupils = async () => {
+        const interval = setInterval(async () => {
+            try {
+                const response = await callApi(`${process.env.REACT_APP_SERVER}/teacher-student-progress`)
+                console.log(response)
+                if (Array.isArray(response)) {
+                    dispatch(setPupils(response))
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }, Number(process.env.REACT_APP_TIMER_IN_MILIS))
+    }
+
+    useEffect(() => {
+        if (token) {
+            getPupils()
+        } else {
+            dispatch(setPupils(mock_pupils))
+        }
+    }, [token])
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
             <div style={{ textAlign: 'left' }}>
@@ -53,14 +88,13 @@ function Pupils() {
                     pupils.map(pupil => {
                         return (
                             <Item>
-                                <span style={{ writingMode: 'vertical-lr', textOrientation: 'mixed' }}>{`${pupil.class}  Класс`}</span>
                                 <Item.Content>
-                                    <Item.Header>{pupil.name}</Item.Header>
+                                    <Item.Header>{pupil.username}</Item.Header>
                                     <Item.Description>
                                         {
                                             quests.map(quest => {
                                                 return (
-                                                    <Label size='tiny' color={quest <= pupil.progress ? 'green' : 'grey'}>{quest}</Label>
+                                                    <Label size='tiny' color={pupil.last_quest.quest_id && quest <= pupil.last_quest.quest_id ? 'green' : 'grey'}>{quest}</Label>
                                                 )
                                             })
                                         }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Pupils from '../../components/pupilsStatus'
 import Log from '../../components/logs'
 import { Grid, Segment } from 'semantic-ui-react'
