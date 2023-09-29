@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Label, Item } from 'semantic-ui-react'
+import { Label, Item, Icon, Divider } from 'semantic-ui-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { callApi } from '../../api'
 import { setPupils } from '../../reducers'
@@ -86,8 +86,40 @@ function Pupils() {
             <Item.Group divided style={{ marginTop: '0px !important' }}>
                 {
                     pupils.map(pupil => {
+                        if (pupil.online)
                         return (
                             <Item>
+                                <span style={{ writingMode: 'vertical-lr', textOrientation: 'mixed' }}>{`${pupil.grade}  Класс`}</span>
+                                <Item.Content>
+                                    <Item.Header>{pupil.username}</Item.Header>
+                                    <Item.Description>
+                                        {
+                                            quests.map(quest => {
+                                                return (
+                                                    <Label size='tiny' color={pupil.last_quest.quest_id && quest <= pupil.last_quest.quest_id ? 'green' : 'grey'}>{quest}</Label>
+                                                )
+                                            })
+                                        }
+                                    </Item.Description>
+                                </Item.Content>
+                            </Item>
+                        )
+                    })
+                }
+            </Item.Group>
+            <Divider/>
+            <div style={{ textAlign: 'left' }}>
+                {/* Заголовок и содержимое второй колонки */}
+                <h2>Не в сети</h2>
+                {/* Содержимое второй колонки */}
+            </div>
+            <Item.Group divided style={{ marginTop: '0px !important' }}>
+                {
+                    pupils.map(pupil => {
+                        if (!pupil.online)
+                        return (
+                            <Item>
+                                <span style={{ writingMode: 'vertical-lr', textOrientation: 'mixed' }}>{`${pupil.grade}  Класс`}</span>
                                 <Item.Content>
                                     <Item.Header>{pupil.username}</Item.Header>
                                     <Item.Description>

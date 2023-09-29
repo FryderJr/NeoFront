@@ -1,0 +1,192 @@
+.text-aligned-left {
+    text-align: left;
+}
+
+.text-large {
+    color: #000293;
+    font-size: xx-large;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.text-huge {
+    color: white;
+    font-size: 40px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 900;
+}
+
+.text-huge-blue {
+    color: #000293;
+    font-size: 50px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 900;
+}
+
+.text-giant {
+    color: white;
+    font-size: 52px;
+    font-family: 'Manrope';
+    font-weight: 600;
+}
+
+.text-list {
+    color: #000293;
+    font-size: 20px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 600;
+}
+
+.text-list-huge {
+    color: #000293;
+    font-size: 18px;
+    line-height: 28px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 500;
+}
+
+.text-white {
+    color: white;
+    font-size: 18px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 400;
+}
+
+.second-image {
+    min-height: 110vh;
+    background-image: linear-gradient(0.519turn,rgba(32,108,235,1) 0%,rgba(47,1,102,1) 100%) !important;
+    background-size: cover;
+}
+
+.third-image {
+    min-height: 110vh;
+    background-color: #00039c !important;
+    background-size: cover;
+}
+
+.item-title {
+    z-index: 2;
+    position: relative;
+    font-weight: 700;
+    padding-top: 65px;
+    padding-bottom: 10px;
+}
+
+.item-title-text {
+    font-size: 24px;
+    font-weight: 800;
+    font-family: Manrope;
+    color: rgb(255, 255, 255);
+    text-align: left;
+}
+
+.item-body-text {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Manrope;
+    line-height: 1.55;
+    color: rgb(255, 254, 254);
+}
+
+.item-symbol {
+    position: absolute;
+    z-index: 1;
+    line-height: 150px;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    font-size: 200px;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: rgba(230,230,230,.7);
+    opacity: .6;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.forth-text {
+    color: white;
+    font-size: 70px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 900;
+    line-height: 62px;
+    margin: 10%;
+    text-align: center;
+}
+
+.forth-button {
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Manrope',Arial,sans-serif;
+    line-height: 1.45;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    padding: 20px;
+    cursor: pointer;
+    background-image: linear-gradient(0.1353400237431346turn,rgba(0,247,247,1) 0%,rgba(229,0,219,1) 100%);
+    border-radius: 40px;
+    border-color: #ffffff;
+    transition: background-color 1s ease-in-out, color 1s ease-in-out, border-color 1s ease-in-out;
+}
+
+.fifth-image {
+    min-height: 110vh;
+    background-image: linear-gradient(0.02turn,rgba(32,108,235,1) 0%,rgba(47,1,102,1) 100%) !important;
+}
+
+.fifth-background-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-size: cover;
+    z-index: 0;
+}
+
+.fifth-text-huge {
+    color: white;
+    font-size: 50px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 900;
+    z-index: 2;
+}
+
+.fifth-text-large {
+    color: white;
+    font-size: 24px;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 500;
+    line-height: 28px;
+    z-index: 2;
+}
+
+.ui.checkbox label {
+    color: white !important;
+    font-size: 18px !important;
+    font-family: 'Manrope',Arial,sans-serif;
+    font-weight: 500;
+    z-index: 2;
+}
+
+.fifth-send-button {
+    color: #090080;
+    border-radius: 30px;
+    font-size: 18px;
+    font-family: Manrope;
+    cursor: pointer;
+    background-image: linear-gradient(0.034turn,rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%);
+    transition: 0.3s ease all;
+    padding: 0px 15px;
+    display: block;
+    width: 260px;
+    font-weight: 700;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px 0px;
+}
+
+.fifth-send-button :hover {
+    background-color: #090080;
+}

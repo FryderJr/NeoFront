@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
 import { Button, Input, Modal, Message } from 'semantic-ui-react'
 import { login } from '../../api'
-import { setToken, setUser } from '../../reducers'
+import { setShowAuth, setToken, setUser } from '../../reducers'
 import { useDispatch, useSelector } from 'react-redux'
 
 function Auth() {
 
   const token = useSelector(state => { console.log(state); return state.auth.token })
+  const open = useSelector(state => state.auth.showAuth)
   const user = useSelector(state => state.auth.user)
 
   console.log(token)
   console.log(user)
 
   const dispatch = useDispatch()
-
-  const [open, setOpen] = useState(true)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -32,7 +31,7 @@ function Auth() {
       dispatch(setToken(newToken))
       dispatch(setUser(data))
       setError('')
-      setOpen(false)
+      dispatch(setShowAuth(false))
     } catch (e) {
       console.log(e)
       setError('Не удалось авторизоваться. Проверьте правильность введённых данных или попробуйте позднее')
@@ -45,7 +44,8 @@ function Auth() {
       basic
       dimmer='blurring'
       size='mini'
-      onOpen={() => setOpen(true)}
+      onOpen={() => dispatch(setShowAuth(true))}
+      onClose={() => dispatch(setShowAuth(false))}
       open={open}
     >
       <Modal.Header>NEO</Modal.Header>

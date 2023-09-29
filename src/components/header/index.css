@@ -1,0 +1,13 @@
+.header-container {
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.header-menu {
+    border-radius: 0px !important;
+    margin: 0px !important;
+}
+
+.header-option {
+    color: #000293 !important;
+}

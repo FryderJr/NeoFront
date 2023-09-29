@@ -2,6 +2,7 @@ import { configureStore, createSlice, combineReducers } from '@reduxjs/toolkit'
 
 const authState = {
   token: '',
+  showAuth: false,
   user: {
     username: '',
     password: ''
@@ -22,6 +23,9 @@ const authSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload
+    },
+    setShowAuth: (state, action) => {
+      state.showAuth = action.payload
     }
   }
 })
@@ -44,7 +48,7 @@ const reducer = combineReducers({
   data: dataSlice.reducer
 })
 
-export const { setToken, setUser } = authSlice.actions
+export const { setToken, setUser, setShowAuth } = authSlice.actions
 export const { setPupils, setLogs } = dataSlice.actions
 
 export const store = configureStore({
