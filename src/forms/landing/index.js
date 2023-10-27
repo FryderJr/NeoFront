@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Segment, Grid, List, Form, Input } from 'semantic-ui-react'
 import ReactPlayer from 'react-player/youtube'
+import { callApi } from '../../api'
 import './index.css'
 
 function Landing() {
@@ -15,6 +16,15 @@ function Landing() {
 
     const jump = (id) => {
         document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const sendData = () => {
+        console.log('sendData')
+        const text = `${email}, ${name}, ${phone}, ${comment}`
+        const body = {
+            text
+        }
+        callApi(`${process.env.REACT_APP_SERVER}/send-email/`, body)
     }
 
     return (
@@ -306,8 +316,8 @@ function Landing() {
                             <br />
                             <Form style={{ zIndex: 2 }}>
                                 <Form.TextArea value={comment} placeholder='Комментарий' onChange={(e) => { setComment(e.target.value) }}></Form.TextArea>
-                                <Form.Checkbox checked={isConset} label='Я согласен с Политикой конфеденциальности' onChange={(e) => { setIsConset(e.currentTarget.checked) }} ></Form.Checkbox>
-                                <button disabled={!isConset} className='fifth-send-button'>Отправить</button>
+                                <Form.Checkbox checked={isConset} label='Я согласен с Политикой конфеденциальности' onChange={(e, data) => { setIsConset(data.checked) }} ></Form.Checkbox>
+                                <button disabled={!isConset} className='fifth-send-button' onClick={sendData}>Отправить</button>
                             </Form>
                         </Grid.Column>
                         <Grid.Column width='2' />
